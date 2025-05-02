@@ -91,39 +91,68 @@ export default {
   color: white;
 }
 
-/* Основной текст VIP с градиентом и анимацией */
+/* Основной элемент с градиентом и свечением */
 .text-vip {
+  position: relative;
   font-weight: 800;
   font-family: "Poppins", sans-serif;
   font-size: 1.8rem;
   user-select: none;
   cursor: pointer;
-  background-image: linear-gradient(
-    270deg,
-    #FFD700,
-    #DAA520,
-    #CD7F32,
-    #DAA520,
-    #FFD700
-  );
+
+  background-image:
+    linear-gradient(
+      270deg,
+      #FFD700,
+      #DAA520,
+      #CD7F32,
+      #DAA520,
+      #FFD700
+    );
+
   background-repeat: repeat;
+
   background-size: 200% 100%;
+
   background-position: 0% 50%;
+
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  color: transparent;
-  animation: gradientShift 7.2s linear infinite;
-  text-shadow:
-    0 0 4px rgba(255, 215, 0, 0.8),
-    0 0 10px rgba(255, 215, 0, 0.6),
-    0 0 15px rgba(255, 215, 0, 0.4);
-  will-change: background-position;
-  transform: translateZ(0);
-  transition: text-shadow 0.3s ease;
+
+  animation:
+    gradientShift 7.2s linear infinite,
+    glowEffect 3s ease-in-out infinite alternate;
 }
 
-/* Анимация плавного сдвига градиента */
+/* Псевдоэлемент для блика внутри букв VIP */
+.text-vip::before {
+  content: "VIP";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.2) 15%,
+    rgba(255, 255, 255, 0.7) 30%,
+    rgba(255, 255, 255, 0.9) 50%,
+    rgba(255, 255, 255, 0.7) 70%,
+    rgba(255, 255, 255, 0.2) 85%,
+    transparent 100%
+  );
+  background-repeat: no-repeat;
+  background-size: 30% 100%;
+  background-position: -60% -50%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: vipShine 9s ease-in-out infinite;
+}
+
+/* Плавный сдвиг градиента с зацикливанием */
 @keyframes gradientShift {
   0% {
     background-position: 0% 50%;
@@ -133,29 +162,35 @@ export default {
   }
 }
 
-/* Плавное свечение при наведении и фокусе */
-@keyframes glowEffectMobile {
-  0%, 100% {
+/* Анимация свечения вокруг букв */
+@keyframes glowEffect {
+  0% {
     text-shadow:
-      0 0 4px #ffd700,
-      0 0 8px #ffd700,
-      0 0 12px #ffdb4d;
+      0 0 2.5px rgba(255, 215, 0, 0.25),
+      0 0 5px rgba(255, 215, 0, 0.15);
   }
-  50% {
+  100% {
     text-shadow:
-      0 0 8px #fff8aa,
-      0 0 14px #ffeb66,
-      0 0 20px #fff;
+      0 0 5px rgba(255, 215, 0, 0.4),
+      0 0 10px rgba(255, 215, 0, 0.25),
+      0 0 15px rgba(255, 215, 0, 0.15);
   }
 }
 
-.text-vip:hover,
-.text-vip:focus-visible {
-  animation: gradientShift 7.2s linear infinite, glowEffectMobile 3s ease-in-out infinite alternate;
-  text-shadow:
-    0 0 8px #fff,
-    0 0 15px #ffe600,
-    0 0 25px #fff9a8;
+/* Анимация блика под углом 120 градусов */
+@keyframes vipShine {
+  0% {
+    background-position: -60% -50%;
+  }
+  10% {
+    background-position: 50% 0%;
+  }
+  20% {
+    background-position: 150% 50%;
+  }
+  100% {
+    background-position: 150% 50%;
+  }
 }
 
 .text-auto {
