@@ -103,7 +103,7 @@ export default {
   background-image:
     linear-gradient(
       270deg,
-      #FFD700,
+      #FFD701,
       #DAA520,
       #CD7F32,
       #DAA520,
