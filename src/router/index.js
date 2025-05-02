@@ -19,12 +19,12 @@ const routes = [
   { path: '/booking', component: BookingPage, name: 'Booking' },
   { path: '/reviews', component: ReviewsPage, name: 'Reviews' },
   { path: '/admin', component: AdminPage, name: 'Admin' },
-  { path: '/contacts', component: ContactsPage, name: 'Contacts' }, // Контакты
-  { path: '/about', component: AboutPage },
+  { path: '/contacts', component: ContactsPage, name: 'Contacts' },
+  { path: '/about', component: AboutPage, name: 'About' },
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory('/vipauto/'), // Указываем базовый путь
   routes,
 });
 
